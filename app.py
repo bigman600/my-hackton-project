@@ -6,18 +6,6 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 
-class MyBox(GridLayout):
-   def build(self):
-       layout = GridLayout(orientation='vertical' , padding=8 , spacing=8)
-       # welcome to the top message of my app
-       welcome = Label(
-           text="Today weather forecast news in Rwanda",
-           font_size=25,
-           size_hint_y=(1, 3),
-             color=(0, 0, 0, 1)
-       )
-       return layout
-
 class MyGrid(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -38,9 +26,10 @@ class MyGrid(GridLayout):
         self.cell_name = TextInput()
         self.add_widget(self.cell_name)
 
+
+        #to run my app
 class WeatherApp(App):
     def build(self):
         return MyGrid()
-        return MyBox()
 if __name__ == "__main__":
     WeatherApp().run()
