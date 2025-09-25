@@ -25,7 +25,18 @@ class MyGrid(GridLayout):
         self.add_widget(Label(text="cell: "))
         self.cell_name = TextInput()
         self.add_widget(self.cell_name)
-
+        
+        # button
+        self.submit = Button(text="NEXT", font_size=32)
+        self.submit.bind(on_press=self.pressed)
+        self.add_widget(self.submit)        
+    def pressed(self, instance):    
+        country = self.country_name.text
+        province = self.province_name.text      
+        district = self.district_name.text
+        sector = self.sector_name.text
+        cell = self.cell_name.text
+        print(f"country: {country}, province: {province}, district: {district}, sector: {sector}, cell: {cell}")    
 
         #to run my app
 class WeatherApp(App):
