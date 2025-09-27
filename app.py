@@ -3,6 +3,7 @@ import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
@@ -16,30 +17,45 @@ from kivy.utils import platform
 class Firstscreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        main_layout = BoxLayout(orientation="vertical")
+        main_layout = BoxLayout(orientation="vertical", padding=10, spacing=10)
 
         # to add grid in put fields
-        grid = GridLayout(cols=2, padding=10, spacing=10)
+        grid = GridLayout(cols=1, padding=10, spacing=10)
         grid.bind(minimum_height=grid.setter('height'))
 
         # add input fields
         grid.add_widget(Label(text="Enter your location details:", font_size=24))
-        grid.add_widget(Label(text="country: "))
-        self.country_name = TextInput(multiline=False)
-        grid.add_widget(self.country_name)
-        grid.add_widget(Label(text="province: "))
-        self.province_name = TextInput(multiline=False)
-        grid.add_widget(self.province_name)
-        grid.add_widget(Label(text="district: "))
-        self.district_name = TextInput(multiline=False)
-        grid.add_widget(self.district_name)
-        grid.add_widget(Label(text="sector: "))
-        self.sector_name = TextInput(multiline=False)
-        grid.add_widget(self.sector_name)
-        grid.add_widget(Label(text="cell: "))
-        self.cell_name = TextInput(multiline=False)
-        grid.add_widget(self.cell_name)
 
+        # input fields for location details
+        row = BoxLayout(orientation='horizontal', size_hint_y=None, height=60)
+        row.add_widget(Label(text="country: ", size_hint_x=0.3, halign='right', valign='middle'))
+        self.country_name = TextInput(multiline=False, halign='left', size_hint_x=0.7, height=60)
+        row.add_widget(self.country_name)
+        grid.add_widget(row)
+
+        row = BoxLayout(orientation='horizontal', size_hint_y=None, height=60)
+        row.add_widget(Label(text="province: ", size_hint_x=0.3, halign='right', valign='middle'))
+        self.province_name = TextInput(multiline=False, halign='left', size_hint_x=0.7, height=60)
+        row.add_widget(self.province_name)
+        grid.add_widget(row)
+
+        row = BoxLayout(orientation='horizontal', size_hint_y=None, height=60)
+        row.add_widget(Label(text="district: ", size_hint_x=0.3, halign='right', valign='middle'))
+        self.district_name = TextInput(multiline=False, halign='left', size_hint_x=0.7, height=60)
+        row.add_widget(self.district_name)
+        grid.add_widget(row)
+
+        row = BoxLayout(orientation='horizontal', size_hint_y=None, height=60)
+        row.add_widget(Label(text="sector: ", size_hint_x=0.3, halign='right', valign='middle'))
+        self.sector_name = TextInput(multiline=False, halign='left', size_hint_x=0.7, height=60)
+        row.add_widget(self.sector_name)
+        grid.add_widget(row)
+
+        row = BoxLayout(orientation='horizontal', size_hint_y=None, height=60)
+        row.add_widget(Label(text="cell: ", size_hint_x=0.3, halign='right', valign='middle'))
+        self.cell_name = TextInput(multiline=False,halign='left', size_hint_x=0.7, height=60)
+        row.add_widget(self.cell_name)
+        grid.add_widget(row)
 
         # button to the next screen
         self.submit = Button(text="NEXT", font_size=32)
