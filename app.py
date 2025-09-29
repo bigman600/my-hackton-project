@@ -14,6 +14,7 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.utils import platform
 import pandas as pd
+from kivy.uix.scrollview import ScrollView
 
 
 
@@ -104,10 +105,8 @@ class Secondscreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.cols = 1
-        self.add_widget(Label(text="This is the second screen"))
-        back_btn = Button(text="Back", font_size=32)
-        back_btn.bind(on_press=self.go_back)
-        self.add_widget(back_btn)
+        self.add_widget(Label(text="Datasets loaded successfully."))
+       
     
 class mylayout(BoxLayout):
     def __init__(self, **kwargs):
@@ -120,6 +119,8 @@ class mylayout(BoxLayout):
         self.data3 = pd.read_csv(r"C:\Users\user\Documents\hackthon\Datasets")
         self.data4 = pd.read_csv(r"C:\Users\user\Documents\hackthon\Microdata_SAS2021")
         self.data5 = pd.read_csv(r"C:\Users\user\Documents\hackthon\Microdata_SAS2021_spss")
+        print("Datasets loaded successfully.")
+        
             
         #  show header of datasets
         print(self.data.head())
@@ -127,18 +128,32 @@ class mylayout(BoxLayout):
         print(self.data3.head())    
         print(self.data4.head())
         print(self.data5.head())
-        self.add_widget(Label(text="Datasets Loaded Successfully", font_size=24))
         
-        #create a 'go back' button 
-        back_btn = Button(text="Go Back", font_size=32)
-        back_btn.screen_to_go="first"
-        back_btn.bind(on_press=self.go_back)
-        self.add_widget(back_btn)
-        self.add_widget(Label(text="Datasets Loaded Successfully", font_size=24))
-        def go_back(self, instance):
-         """go back to the first screen"""
-         self.manager.current = "first"
+        
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.orientation = "vertical"
+       
+       # convert datasets to string for display
+        text_data = data.head(20).to_string(index=False)
 
+        scroll = ScrollView(size_hint=(1, 1))
+        label = Label(text=text_data, font_size=14, size_hint_y=None)
+        label.bind(texture_size=label.setter("size"))
+
+        scroll.add_widget(label)
+        self.add_widget(scroll) 
+        
+        class secondscreen(Screen):
+            def __init__(self, **kwargs):
+                def go_back(self):
+                    self.manager.current = "first"
+                     
+              
+        
+        
+        
+        
             
     
             
