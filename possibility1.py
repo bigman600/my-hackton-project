@@ -1,13 +1,23 @@
-import kivy
-from kivy.uix.floatlayout import Layout
+import flet
+from flet import *
+from functools import partial
+import time
 
-class me(app):
-
-
-
-class me():
+class navigation_bar(UserControl):
+   def __init__(self):
+      super().__init__()
    def build(self):
-      
-      
+      return Container(content=None)
 
-if __name__ = ('main'):
+#main function
+def main(page: Page):
+   # title
+   page.title ='flet modern sidebar'
+   
+   #alignement
+   
+   page.vertical_alignment = 'center'
+   page.horizontal_alignment = 'center'
+
+   add class to page
+   
