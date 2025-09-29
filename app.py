@@ -1,6 +1,10 @@
 # my weather app
+
+
+from typing import Self
 import kivy 
 from kivy.app import App
+from kivy.uix.behaviors import button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
@@ -9,6 +13,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.utils import platform
+import pandas as pd
 
 
 
@@ -103,10 +108,40 @@ class Secondscreen(Screen):
         back_btn = Button(text="Back", font_size=32)
         back_btn.bind(on_press=self.go_back)
         self.add_widget(back_btn)
+    
+class mylayout(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.orientation = "vertical"
+        # load datasets
+     
+        self.data = pd.read_csv(r"C:\Users\user\Documents\hackthon\rwa-nisr-sas-2018-stata")  
+        self.data2 = pd.read_csv(r"C:\Users\user\Documents\hackthon\rwa-nisr-sas-2018-spss")
+        self.data3 = pd.read_csv(r"C:\Users\user\Documents\hackthon\Datasets")
+        self.data4 = pd.read_csv(r"C:\Users\user\Documents\hackthon\Microdata_SAS2021")
+        self.data5 = pd.read_csv(r"C:\Users\user\Documents\hackthon\Microdata_SAS2021_spss")
+            
+        #  show header of datasets
+        print(self.data.head())
+        print(self.data2.head())
+        print(self.data3.head())    
+        print(self.data4.head())
+        print(self.data5.head())
+        self.add_widget(Label(text="Datasets Loaded Successfully", font_size=24))
+        
+        #create a 'go back' button 
+        back_btn = Button(text="Go Back", font_size=32)
+        back_btn.screen_to_go="first"
+        back_btn.bind(on_press=self.go_back)
+        self.add_widget(back_btn)
+        self.add_widget(Label(text="Datasets Loaded Successfully", font_size=24))
+        def go_back(self, instance):
+         """go back to the first screen"""
+         self.manager.current = "first"
 
-    def go_back(self, instance):
-        """go back to the first screen"""
-        self.manager.current = "first"
+            
+    
+            
 
 
 
